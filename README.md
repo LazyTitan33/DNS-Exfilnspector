@@ -2,7 +2,7 @@
 Decode DNS Exfiltration queries automatically to convert Blind RCE into proper RCE via Burp Collaborator
 
 #### Requirements:
-[BurpSuite](https://portswigger.net/burp/documentation/desktop/getting-started/download-and-install)  
+[BurpSuite Professional Edition](https://portswigger.net/burp/documentation/desktop/getting-started/download-and-install)  
 [Jython 2.7.2](https://www.jython.org/download.html)
 
 #### How to install:  
