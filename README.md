@@ -1,2 +1,12 @@
 # DNS-Exfilnspector
-Decode DNS queries automatically for blind RCE output over DNS via Burp Collaborator
+Decode DNS Exfiltration queries automatically to convert Blind RCE into proper RCE via Burp Collaborator
+
+#### Requirements:
+[BurpSuite](https://portswigger.net/burp/documentation/desktop/getting-started/download-and-install)  
+[Jython 2.7.2](https://www.jython.org/download.html)
+
+#### How to install:  
+[Install in BurpSuite](https://github.com/0xC01DF00D/Collabfiltrator/wiki/Installation-in-Burp-Suite-Professional)
+
+#### Usage:
+Tutorial with pictures
