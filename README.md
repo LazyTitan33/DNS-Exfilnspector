@@ -30,7 +30,10 @@ You can switch back and forth between Base64 and Hex while using the same Burp C
 I checked the box for base64 and reissued the command to exfiltrate and we get the output properly and automatically decoded:  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/7344a19c-4cfd-4a00-8c83-790505165434)
 
-If, at the end, you want to save the Raw or Decoded output, you have buttons on the right side to do so. Clicking on the button opens a window for you to choose where to save the output, in what file and after you open said file, you'll see each RAW output on a new line, in the order they were received.  
+If, at the end, you want to save the Raw or Decoded output, you have buttons on the right side to do so.  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/2e9d1938-f719-4d07-877b-338ecb335c08)
+
+Clicking on the button opens a window for you to choose where to save the output, in what file and after you open said file, you'll see each RAW output on a new line, in the order they were received.  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/5d788015-bcf1-4256-892b-1021a194ed19)
 
 In the same fashion, you can save your Decoded output at the end of your session to store it locally:  
