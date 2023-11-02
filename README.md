@@ -21,4 +21,17 @@ You also have a button to copy that link to your clipboard. After sending the pa
 
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/cd835e7b-8c2b-444b-89a6-8f063746c768)
 
+You can switch back and forth between Base64 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/e8bdf929-42da-4df9-9104-1fae3856e6f6)
 
+I checked the box for base64 and reissued the command to exfiltrate and we get the output properly and automatically decoded:  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/7344a19c-4cfd-4a00-8c83-790505165434)
+
+If, at the end, you want to save the Raw or Decoded output, you have buttons on the left side to do so. Clicking on the button opens a window for you to choose where to save the output, in what file and after you open said file, you'll see each RAW output on a new line, in the order they were received.  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/5d788015-bcf1-4256-892b-1021a194ed19)
+
+In the same fashion, you can save your Decoded output at the end of your session to store it locally:  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/2c1c7b99-abc3-4f8b-8905-7a02fc8c3dc7)
+
+Clicking on the Stop Listener button stops the Burp Collaborator from listening, but if you want to continue and use the same link, you can click on **Continue Collaborator** or if you wish to generate a new link, you can click on **Get New Collaborator Link**:  
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/1399883c-3232-46f5-a2c1-e818c667f7e9)
