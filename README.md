@@ -1,5 +1,5 @@
 # DNS-Exfilnspector
-Decode DNS Exfiltration queries automatically to convert Blind RCE into proper RCE via Burp Collaborator
+Automagically decode DNS Exfiltration queries to convert Blind RCE into proper RCE via Burp Collaborator
 
 #### Requirements:
 [Burp Suite Professional Edition](https://portswigger.net/burp/documentation/desktop/getting-started/download-and-install)  
