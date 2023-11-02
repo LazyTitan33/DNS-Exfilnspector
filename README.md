@@ -17,4 +17,8 @@ You can also check the box at the top if you are doing DNS Exfiltration via HEX 
 At the click of a button, you can generate a Burp Collaborator link:  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/69055b12-ff7c-40f0-8a18-deba5bf691d6)
 
-You also have a button to copy that link to your clipboard. 
+You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
+
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/cd835e7b-8c2b-444b-89a6-8f063746c768)
+
+
