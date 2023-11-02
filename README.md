@@ -39,5 +39,4 @@ Clicking on the Stop Listener button stops the Burp Collaborator from listening,
 The **Clear Output** button is self explanatory helping you to clear the output box:  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/a1e66c11-3914-429c-86cc-e3c295d2515c)
 
-# Special Thanks for inspiration to the creators of:
-[Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator)
+### Special Thanks for inspiration to the creators of [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator)
