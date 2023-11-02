@@ -36,6 +36,6 @@ In the same fashion, you can save your Decoded output at the end of your session
 Clicking on the Stop Listener button stops the Burp Collaborator from listening, but if you want to continue and use the same link, you can click on **Continue Collaborator** or if you wish to generate a new link, you can click on **Get New Collaborator Link**:  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/1399883c-3232-46f5-a2c1-e818c667f7e9)
 
-The **Clear Output** button is self explanatory helping you to clear the outpub box:  
+The **Clear Output** button is self explanatory helping you to clear the output box:  
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/a1e66c11-3914-429c-86cc-e3c295d2515c)
 
