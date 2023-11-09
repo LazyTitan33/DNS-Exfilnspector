@@ -21,7 +21,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
     EXT_DESC = "Decode your exfiltrated blind remote code execution output over DNS via Burp Collaborator."
     EXT_THANKS = "Based on work by Adam Logue, Frank Scarpella, Jared McLaren, Ryan Griffin (Collabfiltrator)"
     EXT_AUTHOR = "Paul Serban"
-    EXT_VERSION = "1.0"
+    EXT_VERSION = "1.1"
     # Output info to the Extensions console and register Burp API functions
     def registerExtenderCallbacks(self, callbacks):
         print ("Name: \t\t"      + BurpExtender.EXT_NAME)
@@ -334,7 +334,11 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
                 dnsQuery = self._helpers.base64Decode(check[i].getProperty('raw_query'))
                 preambleOffset = int(dnsQuery[12]) #Offset in dns query where preamble starts (0000,0001,0002,0003....)
                 encoded_answer = ''.join(chr (x) for x in dnsQuery[13:(13+preambleOffset)])
-                answer.append(encoded_answer)
+                domain = pubDom.split('.')[0]
+                if domain in encoded_answer:
+                    answer.append(encoded_answer.replace(domain, ""))
+                else:
+                    answer.append(encoded_answer)
         
         self.progressBar.setVisible(False) # hide progressbar
         self.progressBar.setIndeterminate(False) #turn off progressbar
