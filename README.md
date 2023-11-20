@@ -12,7 +12,7 @@ Automagically decode DNS Exfiltration queries to convert Blind RCE into proper R
 I was on an engagement where I couldn't send large payloads but I could upload a file and run it with some arguments but again, I was very restricted on length. I found a DNS exfiltrator tool, but I had to constantly change the Collaborator link or I had to manually copy and paste the DNS responses and decode them. I tried using the [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator) plugin but again, I encountered the same issues and it wasn't universally applicable enough for my needs. So I made my own universal DNS decoder.
 
 #### Usage:
-By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _EQLS_, _slash_ and _plus_.
+By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
 ![image](https://i.imgur.com/BdKoGwt.png)
 
 You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/DNS-Exfilnspector):
