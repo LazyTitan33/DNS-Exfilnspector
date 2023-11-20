@@ -71,7 +71,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         # Create labels and text fields
         parametersPanel.add(swing.JLabel("For Base64 Exfiltration"))
         parametersPanel.add(swing.JLabel("Replace = with:"))
-        self.eqlsrepl = swing.JTextField("EQLS", 5)
+        self.eqlsrepl = swing.JTextField("eqls", 5)
         parametersPanel.add(self.eqlsrepl)
         parametersPanel.add(swing.JLabel("Replace / with:"))
         self.slashrepl = swing.JTextField("slash", 5)
