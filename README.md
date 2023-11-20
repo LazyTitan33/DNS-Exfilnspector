@@ -13,7 +13,7 @@ I was on an engagement where I couldn't send large payloads but I could upload a
 
 #### Usage:
 By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
-![image](https://i.imgur.com/BdKoGwt.png)
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/38fbe9b1-5b01-41b3-9a1e-9eb9a8744132)
 
 You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/DNS-Exfilnspector):
 
@@ -43,6 +43,6 @@ Clicking on the Stop Listener button stops the Burp Collaborator from listening,
 ![image](https://i.imgur.com/n3paVer.png)
 
 The **Clear Output** button is self explanatory helping you to clear the output box:  
-![image](https://i.imgur.com/UvvSShP.png)
+![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/0a95f5bc-077f-4934-8ca5-a27108bfb166)
 
 ### Special Thanks for inspiration to the creators of [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator)
