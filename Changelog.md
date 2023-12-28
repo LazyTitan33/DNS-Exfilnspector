@@ -1,3 +1,7 @@
+# v1.3
+
+Fixed freezing issue
+
 # v1.2
 
 Improved DNS query filtering
