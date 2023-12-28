@@ -3,11 +3,11 @@ from burp import IBurpExtender, IBurpExtenderCallbacks, ITab, IBurpCollaboratorI
 #Import Java GUI Objects
 from java.awt import Dimension, FlowLayout, Color, Toolkit, GridBagLayout, GridBagConstraints, Insets, Dimension
 from java.awt.datatransfer import Clipboard, StringSelection
-from javax.swing import JFileChooser
+from javax.swing import JFileChooser, SwingUtilities
 from javax import swing
 from thread import start_new_thread
 import sys, time, threading, base64
-from collections import OrderedDict
+from collections import OrderedDict 
 
 t = "" # declare thread globally so we can stop it from any function
 stopThreads = False # Thread Tracker to prevent dangling threads
@@ -130,7 +130,8 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         self.outputTxt = swing.JTextArea(20,70)
         self.outputScroll = swing.JScrollPane(self.outputTxt) # Make the output scrollable
         self.progressBar = swing.JProgressBar(5,15)
-        self.progressBar.setVisible(False) # Progressbar is hiding
+        SwingUtilities.invokeLater(lambda: self.progressBar.setVisible(False))
+        #self.progressBar.setVisible(False) # Progressbar is hiding
 
         self.outputTxt.setEditable(False)
         self.outputTxt.setLineWrap(True)
@@ -146,7 +147,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         self.cp2clip.add(swing.JButton("Copy Collaborator link to Clipboard", actionPerformed=self.copyToClipboard))
         self.hide.add(self.progressBar)
         self.stopListenerButton = swing.JButton("Stop Listener", actionPerformed=self.stopListener)
-        self.stopListenerButton.setVisible(False) # hide stopListenerButton
+        SwingUtilities.invokeLater(lambda: self.stopListenerButton.setVisible(False))
         self.hide.add(self.stopListenerButton)
         self.outbox.add(swing.JLabel(" ")) # spaces to arrange the boxes layout
         self.collname.add(self.burpCollaboratorDomainTxt) # collaborator link shown here
@@ -154,7 +155,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         self.clr.add(swing.JButton("Clear Output", actionPerformed=self.clearOutput))
         self.newlnk.add(swing.JButton("Get New Collaborator Link", actionPerformed=self.executePayload))
         self.contButton = swing.JButton("Continue Collaborator", actionPerformed=self.contCollab)
-        self.contButton.setVisible(False)
+        SwingUtilities.invokeLater(lambda: self.contButton.setVisible(False))
         self.cont.add(self.contButton)
 
         # add the interface within the middleItems grid
@@ -305,64 +306,57 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         no_data_count = 0
         receiving_data = False
         
-        try:
-            while (stopThreads == False):
-                if stopThreads == True:
-                    stopThreads = False
-                    break
-                self.progressBar.setVisible(True) #show progress bar
-                self.progressBar.setIndeterminate(True) #make progress bar show listener is running
-                self.stopListenerButton.setVisible(True) # show stopListenerButton
-                self.contButton.setVisible(False) #show progress bar
-                
-                check = objCollab.fetchCollaboratorInteractionsFor(domain)
-                
-                # determine if data is being received on the collaborator instance
-                if len(check) == 0:
-                    no_data_count += 1
-                else:
-                    no_data_count = 0
-                    receiving_data = True
-                
-                # if data is not received for more than 20ish seconds, stop it and continue the Collaborator so that the output is printed
-                if receiving_data and no_data_count >= 20:
-                    self.killDanglingThreads()
-                    self.contCollab(None)
-                    break
-                encoded_answers = []
-                
-                
-                # parse the DNS query to get the raw output
-                for i in range(0, len(check)):
-                    dnsQuery = self._helpers.base64Decode(check[i].getProperty('raw_query'))
-                    preambleOffset = int(dnsQuery[12]) #Offset in dns query where preamble starts (0000,0001,0002,0003....)             
-                    encoded_answer = ''.join(chr (x) for x in dnsQuery[13:(13+preambleOffset)])
-                                   
-                    encoded_answers.append(encoded_answer)
-
-                unique_encoded_answers = list(OrderedDict.fromkeys(encoded_answers))
-                #print(unique_encoded_answers)
-                
-                domain = pubDom.split('.')[0]
-                for filtered_answer in unique_encoded_answers:
-                    answer.append(filtered_answer.replace(domain, "").replace("_",""))
+        while (stopThreads == False):
+            if stopThreads == True:
+                stopThreads = False
+                break
+            SwingUtilities.invokeLater(lambda: self.progressBar.setVisible(True)) #show progress bar
+            self.progressBar.setIndeterminate(True) #make progress bar show listener is running
+            SwingUtilities.invokeLater(lambda: self.stopListenerButton.setVisible(True)) # show stopListenerButton
+            SwingUtilities.invokeLater(lambda: self.contButton.setVisible(False)) #hide continue button
             
-            self.progressBar.setVisible(False) # hide progressbar
-            self.progressBar.setIndeterminate(False) #turn off progressbar
-            self.stopListenerButton.setVisible(False) # hide stopListenerButton
-            self.contButton.setVisible(True) # show continue button
+            check = objCollab.fetchCollaboratorInteractionsFor(domain)
+            
+            # determine if data is being received on the collaborator instance
+            if len(check) == 0:
+                no_data_count += 1
+            else:
+                no_data_count = 0
+                receiving_data = True
+            
+            # if data is not received for more than 20ish seconds, stop it and continue the Collaborator so that the output is printed
+            if receiving_data and no_data_count >= 20:
+                self.killDanglingThreads()
+                self.contCollab(None)
+                break
+            encoded_answers = []
+            
+            
+            # parse the DNS query to get the raw output
+            for i in range(0, len(check)):
+                dnsQuery = self._helpers.base64Decode(check[i].getProperty('raw_query'))
+                preambleOffset = int(dnsQuery[12]) #Offset in dns query where preamble starts (0000,0001,0002,0003....)             
+                encoded_answer = ''.join(chr (x) for x in dnsQuery[13:(13+preambleOffset)])
+                               
+                encoded_answers.append(encoded_answer)
 
-            # pass the output to the function to decode it and put it in the output box for the user to see
-            output = showOutput(answer, self.eqlsrepl.getText(), self.slashrepl.getText(), self.plusrepl.getText())
-            self.accumulated_output += ''.join(answer) + '\n'
-            self.outputTxt.append(output + '\n')
-            self.outputTxt.setCaretPosition(self.outputTxt.getDocument().getLength()) # make sure scrollbar is pointing to bottom
-        except Exception as e:
-            print("Error in checkCollabDomainStatus:", str(e))
-            self.progressBar.setVisible(False)
-            self.progressBar.setIndeterminate(False)
-            self.stopListenerButton.setVisible(False)
-            self.contButton.setVisible(True)
+            unique_encoded_answers = list(OrderedDict.fromkeys(encoded_answers))
+            #print(unique_encoded_answers)
+            
+            domain = pubDom.split('.')[0]
+            for filtered_answer in unique_encoded_answers:
+                answer.append(filtered_answer.replace(domain, "").replace("_",""))
+        
+        SwingUtilities.invokeLater(lambda: self.progressBar.setVisible(False)) # hide progressbar
+        self.progressBar.setIndeterminate(False) #turn off progressbar
+        SwingUtilities.invokeLater(lambda: self.stopListenerButton.setVisible(False)) # hide stopListenerButton
+        SwingUtilities.invokeLater(lambda: self.contButton.setVisible(True)) # show continue button
+
+        # pass the output to the function to decode it and put it in the output box for the user to see
+        output = showOutput(answer, self.eqlsrepl.getText(), self.slashrepl.getText(), self.plusrepl.getText())
+        self.accumulated_output += ''.join(answer) + '\n'
+        self.outputTxt.append(output + '\n')
+        self.outputTxt.setCaretPosition(self.outputTxt.getDocument().getLength()) # make sure scrollbar is pointing to bottom
         return
 
 def decode_func(input):
