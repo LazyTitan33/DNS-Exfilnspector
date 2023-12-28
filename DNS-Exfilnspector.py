@@ -340,7 +340,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
                 encoded_answers.append(encoded_answer)
             
             unique_encoded_answers = list(OrderedDict.fromkeys(encoded_answers))
-            print(unique_encoded_answers)
+            #print(unique_encoded_answers)
             
             # ensure no duplicate DNS lines one after the other and remove any _ and collab domain
             domain = pubDom.split('.')[0]
