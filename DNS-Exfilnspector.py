@@ -22,7 +22,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
     EXT_DESC = "Decode your exfiltrated blind remote code execution output over DNS via Burp Collaborator."
     EXT_THANKS = "Based on work by Adam Logue, Frank Scarpella, Jared McLaren, Ryan Griffin (Collabfiltrator)"
     EXT_AUTHOR = "Paul Serban"
-    EXT_VERSION = "1.2"
+    EXT_VERSION = "1.3"
     # Output info to the Extensions console and register Burp API functions
     def registerExtenderCallbacks(self, callbacks):
         print ("Name: \t\t"      + BurpExtender.EXT_NAME)
