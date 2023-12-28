@@ -22,7 +22,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
     EXT_DESC = "Decode your exfiltrated blind remote code execution output over DNS via Burp Collaborator."
     EXT_THANKS = "Based on work by Adam Logue, Frank Scarpella, Jared McLaren, Ryan Griffin (Collabfiltrator)"
     EXT_AUTHOR = "Paul Serban"
-    EXT_VERSION = "1.3"
+    EXT_VERSION = "1.2"
     # Output info to the Extensions console and register Burp API functions
     def registerExtenderCallbacks(self, callbacks):
         print ("Name: \t\t"      + BurpExtender.EXT_NAME)
@@ -311,7 +311,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
                 stopThreads = False
                 break
             SwingUtilities.invokeLater(lambda: self.progressBar.setVisible(True)) #show progress bar
-            self.progressBar.setIndeterminate(True) #make progress bar show listener is running
+            SwingUtilities.invokeLater(lambda: self.progressBar.setIndeterminate(True)) #make progress bar show listener is running
             SwingUtilities.invokeLater(lambda: self.stopListenerButton.setVisible(True)) # show stopListenerButton
             SwingUtilities.invokeLater(lambda: self.contButton.setVisible(False)) #hide continue button
             
@@ -324,14 +324,13 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
                 no_data_count = 0
                 receiving_data = True
             
-            # if data is not received for more than 20ish seconds, stop it and continue the Collaborator so that the output is printed
-            if receiving_data and no_data_count >= 20:
+            # if data is not received for more than 10 interactions (10ish seconds), stop it and continue the Collaborator so that the output is printed
+            if receiving_data and no_data_count >= 10:
                 self.killDanglingThreads()
                 self.contCollab(None)
                 break
-            encoded_answers = []
-            
-            
+                
+            encoded_answers = [] 
             # parse the DNS query to get the raw output
             for i in range(0, len(check)):
                 dnsQuery = self._helpers.base64Decode(check[i].getProperty('raw_query'))
@@ -339,16 +338,23 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
                 encoded_answer = ''.join(chr (x) for x in dnsQuery[13:(13+preambleOffset)])
                                
                 encoded_answers.append(encoded_answer)
-
-            unique_encoded_answers = list(OrderedDict.fromkeys(encoded_answers))
-            #print(unique_encoded_answers)
             
+            unique_encoded_answers = list(OrderedDict.fromkeys(encoded_answers))
+            print(unique_encoded_answers)
+            
+            # ensure no duplicate DNS lines one after the other and remove any _ and collab domain
             domain = pubDom.split('.')[0]
+            prev_line = None
+            
             for filtered_answer in unique_encoded_answers:
-                answer.append(filtered_answer.replace(domain, "").replace("_",""))
+                if filtered_answer == prev_line:
+                    answer.append('')
+                else:
+                    answer.append(filtered_answer.replace(domain, "").replace("_", ""))
+                    prev_line = filtered_answer
         
         SwingUtilities.invokeLater(lambda: self.progressBar.setVisible(False)) # hide progressbar
-        self.progressBar.setIndeterminate(False) #turn off progressbar
+        SwingUtilities.invokeLater(lambda: self.progressBar.setIndeterminate(False)) #turn off progressbar
         SwingUtilities.invokeLater(lambda: self.stopListenerButton.setVisible(False)) # hide stopListenerButton
         SwingUtilities.invokeLater(lambda: self.contButton.setVisible(True)) # show continue button
 

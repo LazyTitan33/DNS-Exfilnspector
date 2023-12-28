@@ -1,10 +1,6 @@
-# v1.3
-
-Fixed freezing issue
-
 # v1.2
 
-Improved DNS query filtering
+Improved DNS query filtering to avoid situations where certain DNS resolvers would send multiple identical responses.
 
 # v1.1
 
