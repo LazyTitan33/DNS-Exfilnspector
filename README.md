@@ -15,7 +15,7 @@ I was on an engagement where I couldn't send large payloads but I could upload a
 By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
 ![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/38fbe9b1-5b01-41b3-9a1e-9eb9a8744132)
 
-You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/DNS-Exfilnspector):
+You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
 
 At the click of a button, you can generate a Burp Collaborator link:  
 ![image](https://i.imgur.com/Ssbm6GV.png)
