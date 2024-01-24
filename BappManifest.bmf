@@ -1,0 +1,13 @@
+Uuid: 0e9c1b7acd25422ab1fd1df5d1f09bbd
+ExtensionType: 2
+Name: DNS Exfilnspector
+RepoName: dns-exfilnspector
+ScreenVersion: 1.2
+SerialVersion: 1
+MinPlatformVersion: 0
+ProOnly: True
+Author: LazyTitan
+ShortDescription: Automagically decode DNS Exfiltration queries to convert Blind RCE into proper RCE via Burp Collaborator.
+EntryPoint: DNS-Exfilnspector.py
+BuildCommand: 
+SupportedProducts: Pro

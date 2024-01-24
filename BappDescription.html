@@ -1,0 +1,11 @@
+<p>Automagically decode DNS Exfiltration queries to convert Blind RCE into proper RCE via Burp Collaborator.</p>
+
+<p>Usage:</p>
+
+<p>By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default it will use eqls, slash and plus. You can also check the "Hex" box at the top of the panel if you are doing DNS Exfiltration via HEX encoding.</p>
+
+<p>At the click of a button, you can generate a Burp Collaborator link. You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want.</p>
+
+<p>You can switch back and forth between Base64 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If you forget to switch between encodings, it fails the decoding and reminds you to check.</p>
+
+<p>Output is displayed in a panel in the extension's tab. From here you can also save the output.</p>
