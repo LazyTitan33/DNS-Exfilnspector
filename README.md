@@ -6,7 +6,8 @@ Automagically decode DNS Exfiltration queries to convert Blind RCE into proper R
 [Jython 2.7.3](https://www.jython.org/download.html)
 
 #### How to install:  
-[Install in Burp Suite](https://github.com/0xC01DF00D/Collabfiltrator/wiki/Installation-in-Burp-Suite-Professional)
+[Manual install in Burp Suite](https://github.com/LazyTitan33/DNS-Exfilnspector/wiki/Installation-in-BurpSuite-Pro)  
+[Download from Bapp Store](https://portswigger.net/bappstore/0e9c1b7acd25422ab1fd1df5d1f09bbd)
 
 #### Reason this exists:
 I was on an engagement where I couldn't send large payloads but I could upload a file and run it with some arguments but again, I was very restricted on length. I found a DNS exfiltrator tool, but I had to constantly change the Collaborator link or I had to manually copy and paste the DNS responses and decode them. I tried using the [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator) plugin but again, I encountered the same issues and it wasn't universally applicable enough for my needs. So I made my own universal DNS decoder.
