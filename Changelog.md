@@ -1,3 +1,9 @@
+# v1.3
+
+Improved GUI to allow proper resizing.
+Refactored stopListener function to allow the button/event to work correctly and prevent freezing Burp Suite.
+Improved handling of multiple identical responses.
+
 # v1.2
 
 Improved DNS query filtering to avoid situations where certain DNS resolvers would send multiple identical responses.
