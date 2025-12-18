@@ -29,7 +29,7 @@ You also have a button to copy that link to your clipboard. After sending the pa
 You can switch back and forth between Base64, Base32 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
 <img width="1355" height="612" alt="image" src="https://github.com/user-attachments/assets/cca16fdd-6e87-431e-b2ee-b461b2e8d62f" />
 
-I checked the box for base32 and reissued the command to exfiltrate and we get the output properly and automatically decoded. I've used my own DNS exfiltration [tool](link) via Base32:  
+I checked the box for base32 and reissued the command to exfiltrate and we get the output properly and automatically decoded. I've used my own DNS exfiltration [tool](https://github.com/LazyTitan33/dns-exfiltrator-base32) via Base32:  
 <img width="1355" height="612" alt="image" src="https://github.com/user-attachments/assets/810ae701-8ae8-4bf7-8652-77c0be7166cf" />
 
 If, at the end, you want to save the Raw or Decoded output, you have buttons on the right side to do so.  
