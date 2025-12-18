@@ -19,14 +19,14 @@ By default, the decoding is done from Base64. On the left side of the output box
 You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
 
 At the click of a button, you can generate a Burp Collaborator link:  
-<img width="610" height="218" alt="image" src="https://github.com/user-attachments/assets/0d08935d-7b09-42b1-aaf0-e8935923aa98" />
+<p align="center"><img width="610" height="218" alt="image" src="https://github.com/user-attachments/assets/0d08935d-7b09-42b1-aaf0-e8935923aa98" /></p>
 
 You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
 
 <img width="1184" height="454" alt="image" src="https://github.com/user-attachments/assets/9a9ab830-a9c8-419c-a8a3-41f201f2746e" />
 
 You can switch back and forth between Base64 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
-![image](https://i.imgur.com/MdXKfYL.png)
+<img width="1184" height="455" alt="image" src="https://github.com/user-attachments/assets/2fb8d83e-6f28-40c9-b667-e625972226b4" />
 
 I checked the box for base64 and reissued the command to exfiltrate and we get the output properly and automatically decoded:  
 ![image](https://i.imgur.com/DudmLPF.png)
