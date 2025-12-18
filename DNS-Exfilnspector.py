@@ -8,10 +8,11 @@ from javax import swing
 from thread import start_new_thread
 import sys, time, threading, base64
 from collections import OrderedDict 
+from datetime import datetime
 
 t = "" # declare thread globally so we can stop it from any function
 stopThreads = False # Thread Tracker to prevent dangling threads
-exfilFormat = "hex" #Valid Formats: base64, hex
+exfilFormat = "hex" #Valid Formats: base64, hex, base32
 pubDom = '' # global variable to save and reuse the collaborator link
 pubInstance = '' # global variable to save and reuse the collaborator link
 
@@ -64,11 +65,18 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         tgbc.gridy = 0; tgbc.insets = Insets(5, 5, 5, 5)
         topPanel.add(self.titleLabel, tgbc)
 
+        self.encodingGroup = swing.ButtonGroup()
+
         checkboxesPanel = swing.JPanel(FlowLayout())
-        self.base64Checkbox = swing.JCheckBox("Base64", True, actionPerformed=self.toggleEncodingFormat)
-        self.hexCheckbox = swing.JCheckBox("Hex", False, actionPerformed=self.toggleEncodingFormat)
+        self.base64Checkbox = swing.JCheckBox("Base64", False, actionPerformed=self.toggleEncodingFormat)
+        self.base32Checkbox = swing.JCheckBox("Base32", False, actionPerformed=self.toggleEncodingFormat)
+        self.hexCheckbox = swing.JCheckBox("Hex", True, actionPerformed=self.toggleEncodingFormat)
         checkboxesPanel.add(self.base64Checkbox)
+        checkboxesPanel.add(self.base32Checkbox)
         checkboxesPanel.add(self.hexCheckbox)
+        self.encodingGroup.add(self.base64Checkbox)
+        self.encodingGroup.add(self.base32Checkbox)
+        self.encodingGroup.add(self.hexCheckbox)
         tgbc.gridy = 1
         topPanel.add(checkboxesPanel, tgbc)
 
@@ -205,14 +213,25 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
     # function to determine exfil format
     def toggleEncodingFormat(self, event):
         global exfilFormat
-        if event.getSource() == self.base64Checkbox:
+        source = event.getSource()
+
+        if source == self.base64Checkbox:
             if self.base64Checkbox.isSelected():
                 exfilFormat = 'base64'
                 self.hexCheckbox.setSelected(False)
-        elif event.getSource() == self.hexCheckbox:
+                self.base32Checkbox.setSelected(False)
+
+        elif source == self.base32Checkbox:
+            if self.base32Checkbox.isSelected():
+                exfilFormat = 'base32'
+                self.base64Checkbox.setSelected(False)
+                self.hexCheckbox.setSelected(False)
+
+        elif source == self.hexCheckbox:
             if self.hexCheckbox.isSelected():
                 exfilFormat = 'hex'
                 self.base64Checkbox.setSelected(False)
+                self.base32Checkbox.setSelected(False)
 
     # function to allow locally saving the RAW output
     def saveRawOutputButtonClicked(self, event):
@@ -345,9 +364,9 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
             # parse the DNS query to get the raw output
             for i in range(len(check)):
                 raw_query = check[i].getProperty('raw_query')
+
                 if not raw_query:
                     continue  # skip null/empty entries
-
                 try:
                     dnsQuery = self._helpers.base64Decode(raw_query)
                 except Exception as e:
@@ -387,6 +406,10 @@ def decode_func(input):
     decoded_answer = base64.b64decode(input).decode()
     return decoded_answer
 
+def decode_func_32(input):
+    decoded_answer = base64.b32decode(input).decode()
+    return decoded_answer
+
 def showOutput(answer, eqls, slash, plus):
     if exfilFormat == 'base64':
         completedInputString = ''.join(answer)
@@ -402,6 +425,22 @@ def showOutput(answer, eqls, slash, plus):
                 except Exception as e:
                     answer = "Couldn't decode Base64. Are you using Base64 to exfiltrate?"
         return answer
+    elif exfilFormat == 'base32':
+        completedInputString = ''.join(answer).strip()
+        
+        # Base32 strings must be multiples of 8
+        # If not, calculate how many '=' are needed
+        missing_padding = len(completedInputString) % 8
+        if missing_padding != 0:
+            completedInputString += '=' * (8 - missing_padding)
+        try:
+            # Using the standard base64 library's b32decode
+            # casefold=True handles both upper and lowercase input safely
+            answer = base64.b32decode(completedInputString, casefold=True).decode('utf-8')
+        except Exception as e:
+            answer = "Couldn't decode Base32. Are you using Base32 to exfiltrate?"
+        return answer
+
     else:
         hex_string = ''.join(answer)
         try:
