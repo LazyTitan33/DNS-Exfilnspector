@@ -14,6 +14,7 @@ I was on an engagement where I couldn't send large payloads but I could upload a
 
 #### Usage:
 By default, the decoding is done from Hex. For Base64 you have options on the left side of the output box, from where you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
+
 <img width="1356" height="602" alt="image" src="https://github.com/user-attachments/assets/cf1200c1-d5f3-40ed-9914-1ac8e9313407" />
 
 For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
@@ -23,13 +24,13 @@ At the click of a button, you can generate a Burp Collaborator link:
 
 You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
 
-<img width="1184" height="454" alt="image" src="https://github.com/user-attachments/assets/9a9ab830-a9c8-419c-a8a3-41f201f2746e" />
+<img width="1349" height="606" alt="image" src="https://github.com/user-attachments/assets/6f9dda7a-15c7-4e87-9064-72d40e51d2d4" />
 
-You can switch back and forth between Base64 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
-<img width="1184" height="455" alt="image" src="https://github.com/user-attachments/assets/2fb8d83e-6f28-40c9-b667-e625972226b4" />
+You can switch back and forth between Base64, Base32 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
+<img width="1355" height="612" alt="image" src="https://github.com/user-attachments/assets/cca16fdd-6e87-431e-b2ee-b461b2e8d62f" />
 
-I checked the box for base64 and reissued the command to exfiltrate and we get the output properly and automatically decoded:  
-![image](https://i.imgur.com/DudmLPF.png)
+I checked the box for base32 and reissued the command to exfiltrate and we get the output properly and automatically decoded. I've used my own DNS exfiltration [tool](link) via Base32:  
+<img width="1355" height="612" alt="image" src="https://github.com/user-attachments/assets/810ae701-8ae8-4bf7-8652-77c0be7166cf" />
 
 If, at the end, you want to save the Raw or Decoded output, you have buttons on the right side to do so.  
 ![image](https://i.imgur.com/QADJeTa.png)
