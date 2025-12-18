@@ -1,10 +1,10 @@
 # v1.3
 
-Improved GUI to allow proper resizing.
-Refactored stopListener function to allow the button/event to work correctly and prevent freezing Burp Suite.
-Improved handling of multiple identical responses.
-Change default to Hex
-TO DO: add Base32 support
+Improved GUI to allow proper resizing.  
+Refactored stopListener function to allow the button/event to work correctly and prevent freezing Burp Suite.  
+Improved handling of multiple identical responses.  
+Change default to Hex  
+TO DO: add Base32 support  
 
 # v1.2
 
