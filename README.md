@@ -39,13 +39,13 @@ Clicking on the button opens a window for you to choose where to save the output
 ![image](https://i.imgur.com/OwbyDn7.png)
 
 In the same fashion, you can save your Decoded output at the end of your session to store it locally:  
-![image](https://i.imgur.com/wRlFZiC.png)
+<p align="center"><img width="841" height="843" alt="image" src="https://github.com/user-attachments/assets/d8daa195-fce3-41a2-bc88-415dce21933c" /></p>
 
-Clicking on the Stop Listener button stops the Burp Collaborator from listening, but if you want to continue and use the same link, you can click on **Continue Collaborator** or if you wish to generate a new link, you can click on **Get New Collaborator Link**:  
-<img width="841" height="843" alt="image" src="https://github.com/user-attachments/assets/a0f8f9f2-c05a-4e27-8b69-e752fae8bb4f" />
+Clicking on the Stop Listener button stops the Burp Collaborator from listening, but if you want to continue and use the same link, you can click on **Continue Listening** or if you wish to generate a new link, you can click on **Get New Link**:  
 
 The **Clear Output** button is self explanatory helping you to clear the output box:  
-<img width="1353" height="599" alt="image" src="https://github.com/user-attachments/assets/595330df-0670-47e3-a111-778c9f565e9f" />
+<img width="1081" height="479" alt="image" src="https://github.com/user-attachments/assets/a97420d6-af91-41a6-b7b4-6a2344b513f4" />
+
 
 
 ### Special Thanks for inspiration to the creators of [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator)
