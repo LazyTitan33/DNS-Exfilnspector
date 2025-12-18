@@ -11,7 +11,7 @@ from collections import OrderedDict
 
 t = "" # declare thread globally so we can stop it from any function
 stopThreads = False # Thread Tracker to prevent dangling threads
-exfilFormat = "base64" #Valid Formats: base64, hex
+exfilFormat = "hex" #Valid Formats: base64, hex
 pubDom = '' # global variable to save and reuse the collaborator link
 pubInstance = '' # global variable to save and reuse the collaborator link
 
