@@ -17,9 +17,7 @@ By default, the decoding is done from Hex. For Base64 you have options on the le
 
 <img width="1356" height="602" alt="image" src="https://github.com/user-attachments/assets/cf1200c1-d5f3-40ed-9914-1ac8e9313407" />
 
-For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
-
-At the click of a button, you can generate a Burp Collaborator link:  
+For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex). At the click of a button, you can generate a Burp Collaborator link:  
 <p align="center"><img width="745" height="264" alt="image" src="https://github.com/user-attachments/assets/e57324ba-8b5f-437e-aaf7-0121cc2f2734" /></p>
 
 You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
