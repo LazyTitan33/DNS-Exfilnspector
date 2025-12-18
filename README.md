@@ -13,13 +13,13 @@ Automagically decode DNS Exfiltration queries to convert Blind RCE into proper R
 I was on an engagement where I couldn't send large payloads but I could upload a file and run it with some arguments but again, I was very restricted on length. I found a DNS exfiltrator tool, but I had to constantly change the Collaborator link or I had to manually copy and paste the DNS responses and decode them. I tried using the [Collabfiltrator](https://github.com/0xC01DF00D/Collabfiltrator) plugin but again, I encountered the same issues and it wasn't universally applicable enough for my needs. So I made my own universal DNS decoder.
 
 #### Usage:
-By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
-<img width="1178" height="448" alt="image" src="https://github.com/user-attachments/assets/68bfa24f-b3d6-4171-9d4f-b0eda57cee3f" />
+By default, the decoding is done from Hex. For Base64 you have options on the left side of the output box, from where you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
+<img width="1356" height="602" alt="image" src="https://github.com/user-attachments/assets/cf1200c1-d5f3-40ed-9914-1ac8e9313407" />
 
-You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
+For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
 
 At the click of a button, you can generate a Burp Collaborator link:  
-<p align="center"><img width="610" height="218" alt="image" src="https://github.com/user-attachments/assets/0d08935d-7b09-42b1-aaf0-e8935923aa98" /></p>
+<p align="center"><img width="745" height="264" alt="image" src="https://github.com/user-attachments/assets/e57324ba-8b5f-437e-aaf7-0121cc2f2734" /></p>
 
 You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
 
