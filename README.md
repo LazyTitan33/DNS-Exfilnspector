@@ -14,16 +14,16 @@ I was on an engagement where I couldn't send large payloads but I could upload a
 
 #### Usage:
 By default, the decoding is done from Base64. On the left side of the output box, you can choose the words that you are using to replace the Base64 special characters in your DNS exfiltration. By default, as it was tested with [Ivan Šincek](https://github.com/ivan-sincek/) [DNS Exfiltration tool](https://github.com/ivan-sincek/dns-exfiltrator), it will use _eqls_, _slash_ and _plus_.
-![image](https://github.com/LazyTitan33/DNS-Exfilnspector/assets/80063008/38fbe9b1-5b01-41b3-9a1e-9eb9a8744132)
+<img width="1178" height="448" alt="image" src="https://github.com/user-attachments/assets/68bfa24f-b3d6-4171-9d4f-b0eda57cee3f" />
 
 You can also check the box at the top if you are doing DNS Exfiltration via HEX encoding. For testing with HEX DNS Exfiltration I have developed this [tool](https://github.com/LazyTitan33/dns-exfiltrator-hex):
 
 At the click of a button, you can generate a Burp Collaborator link:  
-![image](https://i.imgur.com/Ssbm6GV.png)
+<img width="610" height="218" alt="image" src="https://github.com/user-attachments/assets/0d08935d-7b09-42b1-aaf0-e8935923aa98" />
 
 You also have a button to copy that link to your clipboard. After sending the payload to the Collaborator, the listener stops when it no longer detects interactions with the Collaborator and decodes the output and displays it automatically. Then the listener starts back up. This allows you to reuse the same Burp Collaborator link as many times as you want:
 
-![image](https://i.imgur.com/XeQHCLz.png)
+<img width="1184" height="454" alt="image" src="https://github.com/user-attachments/assets/9a9ab830-a9c8-419c-a8a3-41f201f2746e" />
 
 You can switch back and forth between Base64 and Hex while using the same Burp Collaborator link and it even supports receiving and decoding multiple lines. If like me, you forget to switch between encodings, it fails the decoding and reminds you to check.  
 ![image](https://i.imgur.com/MdXKfYL.png)
