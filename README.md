@@ -33,7 +33,7 @@ I checked the box for base32 and reissued the command to exfiltrate and we get t
 <img width="1355" height="612" alt="image" src="https://github.com/user-attachments/assets/810ae701-8ae8-4bf7-8652-77c0be7166cf" />
 
 If, at the end, you want to save the Raw or Decoded output, you have buttons on the right side to do so.  
-![image](https://i.imgur.com/QADJeTa.png)
+<p align="center"><img width="173" height="125" alt="image" src="https://github.com/user-attachments/assets/b5ea964a-ded8-470c-87b6-432b5321657b" /></p>
 
 Clicking on the button opens a window for you to choose where to save the output, in what file and after you open said file, you'll see each RAW output on a new line, in the order they were received.  
 ![image](https://i.imgur.com/OwbyDn7.png)
