@@ -10,7 +10,7 @@ import sys, time, threading, base64
 from collections import OrderedDict 
 from datetime import datetime
 
-t = "" # declare thread globally so we can stop it from any function
+t = None # declare thread globally so we can stop it from any function
 stopThreads = False # Thread Tracker to prevent dangling threads
 exfilFormat = "hex" #Valid Formats: base64, hex, base32
 pubDom = '' # global variable to save and reuse the collaborator link
@@ -199,16 +199,9 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
     def getUiComponent(self):
         return self.tab
 
-    def killDanglingThreads(self):
+    def killDanglingThreads(self, event=None):
         global stopThreads
-        global t
         stopThreads = True
-        try:
-            t.join() #rejoin the thread so it detects the stopThreads and exits gracefully
-        except:
-            pass
-        stopThreads = False #Reset the threadTracker so we can run it again
-        return
     
     # function to determine exfil format
     def toggleEncodingFormat(self, event):
@@ -289,36 +282,30 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
 
     def stopListener(self, event):
         global stopThreads
-        stopThreads = True
-
-        # Force UI reset immediately (on the EDT)
-        def reset_ui():
-            self.progressBar.setIndeterminate(False)
-            self.progressBar.setVisible(False)
-            self.stopListenerButton.setVisible(False)
-            self.contButton.setVisible(True)
-
-        SwingUtilities.invokeLater(reset_ui)
-
-        try:
-            if t and t.isAlive():
-                t.join(1)
-        except:
-            pass
-
-        stopThreads = False
+        stopThreads = True # This tells the loop to exit
+        
+        # Update UI immediately so the user knows the command was received
+        self.progressBar.setVisible(False)
+        self.stopListenerButton.setVisible(False)
+        self.contButton.setVisible(True)
 
     def clearOutput(self, event): 
         self.outputTxt.setText("") #clear out output text because button was clicked     
         return  
 
     def checkCollabDomainStatusWrapper(self, domain, burpCollab):
-        global stopThreads
-        threadFinished = False
-        global t
-        t = threading.Thread(target=self.checkCollabDomainStatus, args=(domain, burpCollab)) #comma has to be here even with only 1 arg because it expects a tuple
+        global stopThreads, t
+        
+        # If a thread is already running, stop it first
+        if t is not None and t.isAlive():
+            stopThreads = True
+            # Give it a tiny moment to register the stop signal
+            time.sleep(0.1) 
+
+        stopThreads = False # Reset flag for the new thread
+        t = threading.Thread(target=self.checkCollabDomainStatus, args=(domain, burpCollab))
+        t.daemon = True # This ensures the thread dies if Burp closes
         t.start()
-        return # thread doesn't stop locking in execute button
 
     #copy generated payload to clipboard
     def copyToClipboard(self, event):
@@ -401,6 +388,7 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         self.outputTxt.append(output + '\n')
         self.outputTxt.setCaretPosition(self.outputTxt.getDocument().getLength()) # make sure scrollbar is pointing to bottom
         return
+
 
 def decode_func(input):
     decoded_answer = base64.b64decode(input).decode()
