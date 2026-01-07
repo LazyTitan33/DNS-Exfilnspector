@@ -68,15 +68,15 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         self.encodingGroup = swing.ButtonGroup()
 
         checkboxesPanel = swing.JPanel(FlowLayout())
-        self.base64Checkbox = swing.JCheckBox("Base64", False, actionPerformed=self.toggleEncodingFormat)
-        self.base32Checkbox = swing.JCheckBox("Base32", False, actionPerformed=self.toggleEncodingFormat)
-        self.hexCheckbox = swing.JCheckBox("Hex", True, actionPerformed=self.toggleEncodingFormat)
-        checkboxesPanel.add(self.base64Checkbox)
-        checkboxesPanel.add(self.base32Checkbox)
-        checkboxesPanel.add(self.hexCheckbox)
-        self.encodingGroup.add(self.base64Checkbox)
-        self.encodingGroup.add(self.base32Checkbox)
-        self.encodingGroup.add(self.hexCheckbox)
+        self.base64RadioButton = swing.JRadioButton("Base64", False, actionPerformed=self.toggleEncodingFormat)
+        self.base32RadioButton = swing.JRadioButton("Base32", False, actionPerformed=self.toggleEncodingFormat)
+        self.hexRadioButton = swing.JRadioButton("Hex", True, actionPerformed=self.toggleEncodingFormat)
+        checkboxesPanel.add(self.base64RadioButton)
+        checkboxesPanel.add(self.base32RadioButton)
+        checkboxesPanel.add(self.hexRadioButton)
+        self.encodingGroup.add(self.base64RadioButton)
+        self.encodingGroup.add(self.base32RadioButton)
+        self.encodingGroup.add(self.hexRadioButton)
         tgbc.gridy = 1
         topPanel.add(checkboxesPanel, tgbc)
 
@@ -208,23 +208,16 @@ class BurpExtender (IBurpExtender, ITab, IBurpCollaboratorInteraction, IBurpExte
         global exfilFormat
         source = event.getSource()
 
-        if source == self.base64Checkbox:
-            if self.base64Checkbox.isSelected():
-                exfilFormat = 'base64'
-                self.hexCheckbox.setSelected(False)
-                self.base32Checkbox.setSelected(False)
+        # Only process if being SELECTED (ignore deselection events)
+        if not source.isSelected():
+            return
 
-        elif source == self.base32Checkbox:
-            if self.base32Checkbox.isSelected():
-                exfilFormat = 'base32'
-                self.base64Checkbox.setSelected(False)
-                self.hexCheckbox.setSelected(False)
-
-        elif source == self.hexCheckbox:
-            if self.hexCheckbox.isSelected():
-                exfilFormat = 'hex'
-                self.base64Checkbox.setSelected(False)
-                self.base32Checkbox.setSelected(False)
+        if source == self.base64RadioButton:
+            exfilFormat = 'base64'
+        elif source == self.base32RadioButton:
+            exfilFormat = 'base32'
+        elif source == self.hexRadioButton:
+            exfilFormat = 'hex'
 
     # function to allow locally saving the RAW output
     def saveRawOutputButtonClicked(self, event):
